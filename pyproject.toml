@@ -12,5 +12,6 @@ dependencies = [
     "pydantic[email]>=2.12.5",
     "python-dotenv>=1.2.1",
     "python-jose>=3.5.0",
+    "python-multipart>=0.0.22",
     "uvicorn>=0.40.0",
 ]

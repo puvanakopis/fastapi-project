@@ -4,3 +4,4 @@ from app.core.config import settings
 client = AsyncIOMotorClient(settings.MONGODB_URI)
 db = client["fastapi"]
 users_collection = db["users"]
+products_collection = db["products"]
