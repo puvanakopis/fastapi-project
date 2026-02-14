@@ -33,6 +33,20 @@ async def get_products():
         images=p["images"]
     ) for p in products]
 
+# -------------- Get product by ID --------------
+async def get_product(product_id: str):
+    product = await products_collection.find_one({"_id": product_id})
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return ProductResponse(
+        id=product["_id"],
+        title=product["title"],
+        name=product["name"],
+        gender=product["gender"],
+        sizes=product["sizes"],
+        images=product["images"]
+    )
+
 # -------------- Update product --------------
 async def update_product(product_id: str, data: ProductUpdate):
     update_data = {k: v for k, v in data.dict().items() if v is not None}
@@ -50,3 +64,10 @@ async def update_product(product_id: str, data: ProductUpdate):
         sizes=product["sizes"],
         images=product["images"]
     )
+
+# -------------- Delete product --------------
+async def delete_product(product_id: str):
+    result = await products_collection.delete_one({"_id": product_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return {"message": f"Product {product_id} deleted"}
