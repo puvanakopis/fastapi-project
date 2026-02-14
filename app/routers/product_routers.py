@@ -3,7 +3,7 @@ import shutil
 from fastapi import APIRouter, UploadFile, File, Form
 from typing import List
 from app.schemas.product_schema import ProductCreate, ProductUpdate, ProductResponse
-from app.services.product_service import create_product
+from app.services.product_service import create_product, get_products,  update_product
 
 router = APIRouter(prefix="/products", tags=["Products"])
 
@@ -55,3 +55,7 @@ async def add_product(
         sizes=sizes,
         images=image_paths
     )
+
+@router.get("/", response_model=List[ProductResponse])
+async def list_products():
+    return await get_products()

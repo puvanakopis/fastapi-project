@@ -140,6 +140,8 @@ celerybeat.pid
 .venv
 env/
 venv/
+uploads/
+/uploads
 ENV/
 env.bak/
 venv.bak/
